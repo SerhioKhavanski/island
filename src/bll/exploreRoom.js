@@ -1,17 +1,17 @@
-import { decreaseHp, findedSafeKey } from "../data/data.js";
+import { changeScreen, decreaseHp, findedSafeKey } from "../data/data.js";
 import { action } from "./subscribers.js";
 
 export function exploreTheRoom (){
     switch(Math.round(Math.random() * (2 - 1) + 1)){
         case 1:
             decreaseHp()
+            changeScreen("trap")
             action()
-            alert(`Ты попал в ловушку Джокера, у тебя осталось  хп`)
             break;
         case 2:
             findedSafeKey()
+            changeScreen("key")
             action()
-            alert(`Вы нашли ключ от сейфа`)
             break;
     }
 }

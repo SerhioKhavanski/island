@@ -1,15 +1,9 @@
-let changeListener = null
+let changeListeners = []
 
 export function subscriber (callback){
-    changeListener = callback
-}
-
-export function unsubscribe() {
-    changeListener = null
+    changeListeners.push(callback)
 }
 
 export function action(){
-    if(changeListener){
-        changeListener()
-    }
+    changeListeners.forEach(fn => fn())
 }
