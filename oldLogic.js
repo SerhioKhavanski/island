@@ -1,3 +1,5 @@
+import { exploreTheSafe } from "./src/bll/exploreTheSafe"
+
 let hp = 100
 let inventory = [false, 0, false]
 let steps = 10
@@ -61,85 +63,6 @@ if(steps === 0){
     alert("Ты проиграл и не успел убежать с сотрова")
 }
 
-
-function exploreTheRoom (hp, inventory){
-    switch(Math.round(Math.random() * (2 - 1) + 1)){
-        case 1:
-            hp = hp - Math.round(Math.random() * (20 - 10) + 10)
-            alert(`Ты попал в ловушку Джокера, у тебя осталось ${hp} хп`)
-            break;
-        case 2:
-            inventory[2] = true
-            alert(`Вы нашли ключ от сейфа`)
-            break;
-    }
-    return [hp, inventory]
-}
-
-function exploreTheSafe(hp, inventory){
-
-    if(inventory[2]){
-
-        switch(Math.round(Math.random() * (3 - 1) + 1)){
-            case 1:
-                hp = hp + Math.round(Math.random() * (20 - 10) + 10)
-                if(hp > 100){
-                    hp = 100
-                }
-                alert(`Ты залутал зельку на хп у тебя ${hp} хп`)
-                break;
-
-            case 2:
-                let findTenge = Math.round(Math.random() * (100 - 50) + 50)
-                inventory[1] += findTenge
-                alert(`Вы нашли ${findTenge} тенге, у тебя ${inventory[1]}`)
-                break;
-                
-            case 3:
-                inventory[0] = true
-                alert(`Вы нашли ключ-карту с острова`)
-                break;
-        }
-        inventory[2] = false
-    }
-    else{
-        alert("У вас нет ключа, вы пытаетесь взломать сейф")
-
-        switch(Math.round(Math.random() * (2 - 1) + 1)){
-
-            case 1:
-                alert("Вы взломали сейф")
-                switch(Math.round(Math.random() * (3 - 1) + 1)){
-                    case 1:
-                        hp = hp + Math.round(Math.random() * (20 - 10) + 10)
-                        if(hp > 100){
-                            hp = 100
-                        }
-                        alert(`Ты залутал зельку на хп у тебя ${hp} хп`)
-                        break;
-
-                    case 2:
-                        let findTenge = Math.round(Math.random() * (100 - 50) + 50)
-                        inventory[1] += findTenge
-                        alert(`Вы нашли ${findTenge} тенге, у тебя ${inventory[1]}`)
-                        break;
-                        
-                    case 3:
-                        inventory[0] = true
-                        alert(`Вы нашли ключ-карту с острова`)
-                        break;
-                    }
-
-                break;
-            
-            case 2:
-                alert("Вы не взломали сейф")
-            break;
-        }
-
-    }
-    return [hp, inventory]
-}
 
 
 

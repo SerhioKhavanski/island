@@ -1,5 +1,7 @@
 export let hp = 100
-export let inventory = [false, 0, false]
+export let inventory = [false, 0, true]
+let hpPotion = 0
+let tenge = 0
 let steps = 10
 
 export let screen = {
@@ -56,7 +58,7 @@ const screens = [
     {
         id:"hp",
         img: "src/img/hp.jpg",
-        text: "Ты взломал сейф и теперь у тебя есть зелье hp"
+        text: `Ты взломал сейф и теперь у тебя есть зелье hp на ${hpPotion}`
     } ,
     {
         id:"key_card",
@@ -66,7 +68,7 @@ const screens = [
     {
         id:"tenge",
         img: "src/img/tenge.jpg",
-        text: "Ты нашёл тенге"
+        text: `Ты нашёл ${tenge} тенге`
     } 
 
 ]
@@ -77,6 +79,19 @@ export function changeScreen(room){
    screen = screens.find(s => s.id === room)
 }
 
+export function increaseHp (){
+
+    hpPotion = Math.round(Math.random() * (20 - 10) + 10);
+    hp = hp + hpPotion  
+    if (hp > 100) {
+        hp = 100;
+    }
+}
+
+export function findTenge (){
+    tenge = Math.round(Math.random() * (100 - 50) + 50);
+    inventory[1] += tenge;
+}
 
 export function decreaseHp (){
     hp = hp - Math.round(Math.random() * (20 - 10) + 10)
@@ -84,6 +99,10 @@ export function decreaseHp (){
 
 export function findedSafeKey () {
     inventory[2] = true
+}
+
+export function findCardKey () {
+    inventory[0] = true
 }
 
 export function decreaseSteps (){
