@@ -1,0 +1,11 @@
+.hp-container{
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 10px;  
+    overflow: hidden;
+}
+.hp-container>*{
+    height: 100%;
+    background-color: green;
+}
