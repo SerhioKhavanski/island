@@ -1,14 +1,8 @@
 export let hp = 100
-export let inventory = [false, 0, true]
+export let inventory = [false, 0, false]
 let hpPotion = 0
 let tenge = 0
 let steps = 10
-
-export let screen = {
-    img: "src/img/main_screen.png",
-    text: "Добро пожаловать на чудо остров, поробуй отсюда сбежать"
-} 
-
 const screens = [
     {
         id:"main_screen",
@@ -58,7 +52,7 @@ const screens = [
     {
         id:"hp",
         img: "src/img/hp.jpg",
-        text: `Ты взломал сейф и теперь у тебя есть зелье hp на ${hpPotion}`
+        text: "Ты взломал сейф и теперь у тебя есть зелье hp на "
     } ,
     {
         id:"key_card",
@@ -68,13 +62,25 @@ const screens = [
     {
         id:"tenge",
         img: "src/img/tenge.jpg",
-        text: `Ты нашёл ${tenge} тенге`
+        text: "Ты нашёл "
     } 
 
 ]
+export let screen = screens[0]
 
 
 export function changeScreen(room){
+
+    if(room === screens[9].id){
+        screen = { ...screens[9], text: screens[9].text + hpPotion }
+        return 
+    }
+
+    if(room === screens[11].id){
+        screen = { ...screens[11], text: screens[11].text + `${tenge} тенге` }
+        return 
+
+    }
 
    screen = screens.find(s => s.id === room)
 }
@@ -101,10 +107,17 @@ export function findedSafeKey () {
     inventory[2] = true
 }
 
+export function useSafeKey () {
+    inventory[2] = false
+}
+
 export function findCardKey () {
     inventory[0] = true
 }
 
 export function decreaseSteps (){
-    steps--
+
+    if(steps > 0){
+        steps--
+    }
 }

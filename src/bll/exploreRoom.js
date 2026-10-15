@@ -1,4 +1,4 @@
-import { changeScreen, decreaseHp, findedSafeKey } from "../data/data.js";
+import { changeScreen, decreaseHp, findedSafeKey, decreaseSteps } from "../data/data.js";
 import { action } from "./subscribers.js";
 
 export function exploreTheRoom (){
@@ -14,4 +14,6 @@ export function exploreTheRoom (){
             action()
             break;
     }
+
+    decreaseSteps()
 }

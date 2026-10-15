@@ -3,8 +3,9 @@ import { Screen } from "./src/ui/Screen.js"
 import { Button } from "./src/ui/Button.js"
 import { exploreTheRoom } from "./src/bll/exploreRoom.js"
 import { exploreTheSafe } from "./src/bll/exploreTheSafe.js"
+import { esc } from "./src/bll/escapeFromIsland.js"
 import { HPBar } from "./src/ui/HPBar.js"
 
 const root = document.getElementById('root')
 
-root.append(HPBar(),Inventory(), Screen(), Button(exploreTheRoom, "Explore the Room"), Button(exploreTheSafe, "Explore the Safe"))
+root.append(HPBar(),Inventory(), Screen(), Button(exploreTheRoom, "Explore the Room"), Button(exploreTheSafe, "Explore the Safe"), Button(esc, "Exit"))
