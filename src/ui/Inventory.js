@@ -18,18 +18,30 @@ export function Inventory(){
 
 function getInventoryTable(items){
 
-    const table = document.createElement('table')
-    const tr = document.createElement('tr')
-    const tdKeyCard = document.createElement('td')
-    const tdTenge = document.createElement('td')
-    const tdKeySafe = document.createElement('td')
+    const container = document.createElement('div')
+    container.className = "inventory"
 
-    tdKeyCard.textContent =  "Key Card: "  + items[0]
-    tdTenge.textContent = "Tenge: " + items[1]
-    tdKeySafe.textContent = "Key Safe: " + items[2]
+    const slots = [
+        { label: "Ключ-карта", value: items[0] ? "есть" : "нет", active: items[0] },
+        { label: "Тенге", value: items[1], active: items[1] > 0 },
+        { label: "Ключ от сейфа", value: items[2] ? "есть" : "нет", active: items[2] }
+    ]
 
-    tr.append(tdKeyCard, tdTenge, tdKeySafe)
-    table.append(tr)
-    return table
+    slots.forEach(slot => {
+        const cell = document.createElement('div')
+        cell.className = "inventory-slot" + (slot.active ? " active" : "")
 
+        const label = document.createElement('span')
+        label.className = "inventory-label"
+        label.textContent = slot.label
+
+        const value = document.createElement('span')
+        value.className = "inventory-value"
+        value.textContent = slot.value
+
+        cell.append(label, value)
+        container.append(cell)
+    })
+
+    return container
 }

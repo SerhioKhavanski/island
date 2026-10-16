@@ -1,63 +1,65 @@
+import { action } from "../bll/subscribers.js"
+
 export let hp = 100
 export let inventory = [false, 0, false]
 let hpPotion = 0
 let tenge = 0
-let steps = 10
+export let steps = 10
 const screens = [
     {
         id:"main_screen",
         img: "src/img/main_screen.png",
-        text: "Добро пожаловать на чудо остров, поробуй отсюда сбежать"
+        text: "Добро пожаловать на Чудо-остров! Попробуй отсюда сбежать."
     } ,
     {
         id:"win",
         img: "src/img/win.png",
-        text: "Ты сбежал с чудо острова, молодец !"
+        text: "Ты сбежал с Чудо-острова. Молодец!"
     } ,
     {
         id:"loose",
         img: "src/img/loose.png",
-        text: "Тебе не удалось сбежать с чудо острова, теперь ты здесь навеки "
+        text: "Тебе не удалось сбежать с Чудо-острова. Теперь ты здесь навеки."
     } ,
     {
         id:"trap",
         img: "src/img/trap.jfif",
-        text: "Ты попал в ловушку Джокера"
+        text: "Ты попал в ловушку Джокера."
     } ,
     {
         id:"key",
         img: "src/img/key.jfif",
-        text: "Ты нашёл ключ от сейфа, поздравляю !"
+        text: "Ты нашёл ключ от сейфа. Поздравляю!"
     } ,
     {
         id:"safe",
         img: "src/img/safe.jfif",
-        text: "Ты нашёл сейф !"
+        text: "Ты нашёл сейф!"
     } ,
     {
         id:"exit",
         img: "src/img/exit.jfif",
-        text: "Ты нашёл выход но у тебя нету ключа"
+        text: "Ты нашёл выход, но у тебя нет ключа."
     } ,
     {
         id:"hacking",
         img: "src/img/hacking.jpg",
-        text: "У тебя нет ключа от сейфа ты пытаешься взломать сейф"
+        text: "У тебя нет ключа от сейфа. Ты пытаешься взломать сейф..."
     } ,
     {
         id:"didn't_hack",
         img: "src/img/didn't_hack.jpg",
-        text: "Ты не смог взломать сейф"
+        text: "Ты не смог взломать сейф."
     } ,
     {
         id:"hp",
         img: "src/img/hp.jpg",
-        text: "Ты взломал сейф и теперь у тебя есть зелье hp на "
+        text: "Ты взломал сейф и теперь у тебя есть зелье HP на "
     } ,
     {
         id:"key_card",
         img: "src/img/key_card.jpg",
-        text: "Ты нашёл ключ-карту, теперь ты можешь сбежать с острова"
+        text: "Ты нашёл ключ-карту. Теперь ты можешь сбежать с острова!"
     } ,
     {
         id:"tenge",
@@ -101,6 +103,12 @@ export function findTenge (){
 
 export function decreaseHp (){
     hp = hp - Math.round(Math.random() * (20 - 10) + 10)
+    action()
+
+    if (hp <= 0) {
+        changeScreen("loose")
+        action()
+    }
 }
 
 export function findedSafeKey () {
@@ -115,9 +123,14 @@ export function findCardKey () {
     inventory[0] = true
 }
 
-export function decreaseSteps (){
-
-    if(steps > 0){
+export function decreaseSteps() {
+    if (steps > 0) {
         steps--
+        action() 
+        
+        if (steps === 0) {
+            changeScreen("loose") 
+            action()             
+        }
     }
 }
